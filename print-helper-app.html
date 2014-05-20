@@ -50,7 +50,7 @@
             tab = self.tab;
 
         var storiesGrid = self.buildGrid('User Stories');
-        var backlogGrid = self.buildGrid('Backlog', true);
+        var backlogGrid = self.buildGrid('Backlog Stories', true);
         var defectsGrid = self.buildDefectGrid('Defects');
 
         self.storiesGrid = storiesGrid;
@@ -100,6 +100,7 @@
                 { xtype: 'rownumberer' }
                 ,{ text: 'ID',  dataIndex: 'FormattedID', flex: 1 }
                 ,{ text: 'Story Name', dataIndex: 'Name', flex: 3 }
+                ,{ text: 'Description', dataIndex: 'Description', flex: 6 }
             ]
             ,selModel: Ext.create('Ext.selection.CheckboxModel', {
                 mode: 'MULTI'
@@ -149,6 +150,7 @@
                 { xtype: 'rownumberer' }
                 ,{ text: 'ID',  dataIndex: 'FormattedID', flex: 1 }
                 ,{ text: 'Defect Name', dataIndex: 'Name', flex: 3 }
+                ,{ text: 'Description', dataIndex: 'Description', flex: 6 }
             ]
             ,selModel: Ext.create('Ext.selection.CheckboxModel', {
                 mode: 'MULTI'
@@ -307,12 +309,20 @@
         };
 
         Ext.Array.each(selections, function(selection) {
+            //console.log(selection);
+            if (selection.get('Owner') == null) {
+                ownername = "No Owner";
+                console.log("got it right");
+            } else {
+                ownername = selection.get('Owner')['_refObjectName'];
+            }
             data.artifacts.push({
                 name: selection.get('Name')
                 ,description: selection.get('Description')
                 ,id: selection.get('FormattedID')
-                ,owner: selection.get('Owner')['_refObjectName']
+                ,owner: ownername
                 ,estimate: selection.get('PlanEstimate')
+                ,description: selection.get('Description')
             })
         });
 
@@ -323,7 +333,7 @@
 
             Rally.launchApp('CustomApp', {
                 name:"boost-rallyprinter",
-	            parentRepos:""
+                parentRepos:""
             });
 
         });
