@@ -5,6 +5,8 @@ This app allows you to print Stories per Iteration, Backlog, or Defects per Iter
 
 This app utilizes the print driver on your computer to dictate the size. The cards fill an A4 page in Landscape mode. To print 4 to a page fit 4 pages to a page in your print options and the stories will auto size to fit.
 
+The card content printed includes Formatted Story/Defect ID, Owner Name, Plan Estimate, Rank, and Description in this version.
+
 To use, simply copy the code from the HTML file above and deploy it as a Custom HTML app in a Rally Dashboard.
 
 Screenshot:<P>
